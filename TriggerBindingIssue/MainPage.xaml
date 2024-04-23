@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="TriggerBindingIssue.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:s="clr-namespace:TriggerBindingIssue"
+             BackgroundColor="White">
+
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <s:TagView x:Name="tag" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="200">
+                <s:TagView.Triggers>
+                    <MultiTrigger TargetType="s:TagView">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding Source={x:Reference sw}, Path=IsToggled}" Value="true" />
+                        </MultiTrigger.Conditions>
+                        <Setter Property="MyTag" Value="OK" />
+                        <Setter Property="WidthRequest" Value="400" />
+                    </MultiTrigger>
+                </s:TagView.Triggers>
+            </s:TagView>
+            <Switch x:Name="sw" />
+            <Label Text="{Binding Source={x:Reference tag}, Path=MyTag, StringFormat='MyTag value : {0}'}" />
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>
